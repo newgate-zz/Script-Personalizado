@@ -1,0 +1,97 @@
+//  Desenvolvido por: Newgate
+//  GitHub: https://github.com/newgate/
+//  Versão 1.0
+//****************************************************************************************
+
+-	script Newgate::new 116,{
+
+	set @NomeDoNPC$, "[Newgate Warper]";
+	set @mapapvp$, "pvp_n_1-1";
+	getmapxy(@mapa$,@mapx,@mapy,0);
+
+	mes @NomeDoNPC$;
+	mes "O que eu posso fazer por você?";
+	switch(select("- Teletransportar para Mapa MVP","- Salvar","- Sair...")){
+	
+	case 1: goto L_teleporte;
+	
+		case 2:
+		next;
+                mes @NomeDoNPC$;
+                mes "Salvo";
+		savepoint "prontera",156,179;
+                close;
+                break;
+	
+	case 3:
+		mes @NomeDoNPC$;
+		mes "Até mais!"; 
+		close;
+	}
+
+L_teleporte:
+	next;
+	mes @NomeDoNPC$;
+	mes "Serviços de Teletransporte.";
+	switch(select("- Último lugar visitado.","- Mapas MVP's","- Cidades","- Sair...")){
+	case 1:
+		if(#LastWarp == 1){ warp "prontera",156,188; close;}else{
+		if(#LastWarp == 2){ warp "alberta",28,234; close;}else{
+		if(#LastWarp == 3){ warp "aldebaran",140,131; close;}else{
+		if(#LastWarp == 4){ warp "amatsu",198,84; close;}else{
+		if(#LastWarp == 5){ warp "comodo",209,143; close;}else{
+		if(#LastWarp == 6){ warp "geffen",119,62; close;}else{
+		if(#LastWarp == 7){ warp "gonryun",159,118; close;}else{
+		if(#LastWarp == 8){ warp "izlude",128,109; close;}else{
+		if(#LastWarp == 9){ warp "xmas",147,134; close;}else{
+		if(#LastWarp == 10){ warp "morocc",158,93; close;}else{
+		if(#LastWarp == 11){ warp "payo2",96,113; close;}else{
+		if(#LastWarp == 12){ warp "yuno",157,51; close;}else{
+		if(#LastWarp == 13){ warp "lhz_dun02",265,133; close;}else{
+		if(#LastWarp == 14){ warp "abbey02",149,206; close;}else{
+		if(#LastWarp == 15){ warp "bra_dun01",195,64; close;}else{
+		if(#LastWarp == 16){ warp "thor_v02",128,54; close;}else{
+		if(#LastWarp == 17){ warp "1@nyd",196,298; close;}else{
+		if(#LastWarp == 18){ warp "odin_tem02",290,179; close;}else{
+		if(#LastWarp == 19){ warp "moc_fild20",346,179; close;}else{
+}}}}}}}}}}}}}}}}}}}
+
+	case 3:
+		mes "Escolha uma cidade:";
+		switch(select("Prontera [^FF0000" +getmapusers("prontera.gat")+ "^000000]:Alberta [^FF0000" +getmapusers("alberta.gat")+ "^000000]:Aldebaran [^FF0000" +getmapusers("aldebaran.gat")+ "^000000]:Amatsu [^FF0000" +getmapusers("amatsu.gat")+ "^000000]:Comodo [^FF0000" +getmapusers("comodo.gat")+ "^000000]:Geffen [^FF0000" +getmapusers("geffen.gat")+ "^000000]:Gonryun [^FF0000" +getmapusers("gonryun.gat")+ "^000000]:Izlude [^FF0000" +getmapusers("izlude.gat")+ "^000000]:xmas [^FF0000" +getmapusers("xmas.gat")+ "^000000]:Morroc [^FF0000" +getmapusers("morocc.gat")+ "^000000]:Payon [^FF0000" +getmapusers("payon.gat")+ "^000000]:Yuno [^FF0000" +getmapusers("yuno.gat")+ "^000000]")){
+		case 1: goto L_teleporte;
+		case 2: warp "prontera",156,188; set #LastWarp, 1; close;
+		case 3: warp "alberta",28,234; set #LastWarp, 2; close;
+		case 4: warp "aldebaran",140,131; set #LastWarp, 3; close;
+		case 5: warp "amatsu",198,84; set #LastWarp, 4; close;
+		case 6: warp "comodo",209,143; set #LastWarp, 5; close;
+		case 7: warp "geffen",119,62; set #LastWarp, 6; close;
+		case 8: warp "gonryun",159,118; set #LastWarp, 7; close;
+		case 9: warp "izlude",128,109; set #LastWarp, 8; close;
+		case 10: warp "xmas",147,134; set #LastWarp, 9; close;
+		case 11: warp "morocc",158,93; set #LastWarp, 10; close;
+		case 12: warp "payo2",96,113; set #LastWarp, 11; close;
+		case 13: warp "yuno",157,51; set #LastWarp, 12; close;
+		}
+	case 2:
+		mes "Escolha um MVP:";
+		switch(select("...voltar","- Laboratório","- Beelzebu","- Boitata","- Ifrit","- Nidhoggr","- Valquíria Randrigs","- Satan Morroc","- Glast Heim","- Caverna de Kunlun","- Labirinto de Tatames","- Vila dos Orcs","- Mina do Carvão","- Navio Fantasma","- Cavernas de Comodo","- Ruínas de Morroc","- Torre de Geffen","- Torre do Relógio","- Ilha das Tartarugas","- Caverna de Magma")){
+		case 1: goto L_teleporte;
+		case 2: warp "lhz_dun02",265,133; set #LastWarp, 13; close;	// Caverna de Payon
+		case 3: warp "abbey02",149,206; set #LastWarp, 14; close;	// Esfinge
+		case 4: warp "bra_dun01",195,64; set #LastWarp, 15; close;	// Formigueiro Infernal
+		case 5: warp "thor_v02",128,54; set #LastWarp, 16; close;	// Ilha Byalan
+		case 6: warp "1@nyd",196,298; set #LastWarp, 17; close;		// Fábrica de Brinquedos
+		case 7: warp "odin_tem02",290,179; set #LastWarp, 18; close; //Farol de Pharos
+		case 8: warp "moc_fild20",346,179; set #LastWarp, 19; close;	// Glast Hein
+		}
+
+	case 4:
+		close;
+	}
+OnInit:
+waitingroom "[ Newgate MVP]",0;
+end;
+}
+
+prontera,147,195,3	duplicate(new)	Newgate#11	117
