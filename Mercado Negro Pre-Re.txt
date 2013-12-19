@@ -1,3 +1,8 @@
+// Desenvolvido por: Newgate
+// GitHub: https://github.com/newgate/
+// Versão 2.5
+//****************************************************************************************
+
 prontera,164,171,3	script	Mercado Cirilo	81,{
 mes "[^ff0000Snoop^000000]";
 mes "eae rapaz... Que tu Quer?";
