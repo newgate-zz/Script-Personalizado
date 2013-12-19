@@ -1,0 +1,69 @@
+// Desenvolvido por: Newgate
+// GitHub: https://github.com/newgate/
+// Versão 3.0
+//****************************************************************************************
+
+prontera,161,186,4	script	Teleportadora Vip	80,{
+//---------------------------------------------------------------
+set @NPC$,"^ff0000 Sala ViP ^000000";
+set @MAPA$,"que_temsky";			// Mapa da Sala ViP Free
+set @LUGAR$,"que_temsky";			// Mapa da Sala ViP Paga
+set @vipfree,1;	
+set @vippago,2;
+//---------------------------------------------------------------
+
+if(getgmlevel() < @vipfree) {
+mes @NPC$;
+mes "Você precisa ser ViP!";
+close;
+}
+mes @NPC$;
+mes "Olá, deseja ir para a Sala ViP ?";
+next;
+menu "Ir para lá!",-,"Cancelar!",CANCEL;
+warp @MAPA$, 47, 135; end;
+
+if(getgmlevel() < @vippago) {
+mes @NPC$;
+mes "Você precisa ser ViP!";
+close;
+}
+mes @NPC$;
+mes "Olá, deseja ir para a Sala ViP ?";
+next;
+menu "Ir para lá!",-,"Cancelar!",CANCEL;
+warp @LUGAR$, 47, 135; end;
+
+CANCEL:
+close;
+end;
+}
+
+turbo_room.gat	mapflag	nomemo
+turbo_room.gat	mapflag	noteleport
+turbo_room.gat	mapflag	noreturn
+turbo_room.gat	mapflag	nowarp
+turbo_room.gat	mapflag	nowarpto
+turbo_room.gat	mapflag	nosave	SavePoint
+
+//--------------------------------------------------------------------------------------------
+
+	-	script	Sistema Vip#04	-1,{
+OnClock0001: query_sql "UPDATE `login` SET `diasvip`=`diasvip`-1 WHERE `level`='1'"; end;
+OnClock0002: query_sql "UPDATE `login` SET `group_id`='0' WHERE `diasvip`<='0' AND `level`='1'"; end;
+end;
+}
+
+	-	script	Sistema Vip#02	-1,{
+OnClock0001: query_sql "UPDATE `login` SET `diasvip`=`diasvip`-1 WHERE `group_id`='2'"; end;
+OnClock0002: query_sql "UPDATE `login` SET `group_id`='0' WHERE `diasvip`<='0' AND `group_id`='2'"; end;
+end;
+}
+	-	script	Sistema Vip#03	-1,{
+OnPCLoginEvent:
+if (getgmlevel() >= 20){ end; }
+query_sql "SELECT `diasvip` FROM `login` WHERE `account_id` = '"+getcharid(3)+"'", .@diasvip;
+if(.@diasvip == 0){ end; }
+dispbottom "Olá "+strcharinfo(0)+" você possui "+.@diasvip+" dias VIP.";
+end;
+}
