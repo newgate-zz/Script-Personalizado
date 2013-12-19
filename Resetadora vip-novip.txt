@@ -1,0 +1,79 @@
+// Desenvolvido por: Newgate
+// GitHub: https://github.com/newgate/
+// Versão 4.0
+//****************************************************************************************
+
+que_temsky,50,127,4	script	Resetadora	124,{
+if (getgmlevel() < 0) goto L_no;	
+	mes "[Resetadora]";
+	mes "Olá, eu sou a Resetadora.E esses são os preços:";
+	mes "Resetar Status: 200.000z";
+	mes "Resetar Skills: 200.000z";
+	mes "Resetar Ambos: 300.000z";
+	mes "Selecione a opção desejada:";
+	next;
+	menu "^FF3355Resetar Skills",L0,"Resetar Status",L1,"Resetar Ambos^000000",L2,"Quit",LEnd;
+	
+	if (getgmlevel() < 1) goto L_no;	
+	mes "[Resetadora]";
+	mes "Olá, eu sou a Resetadora.E esses são os preços:";
+	mes "Resetar Status: 0z";
+	mes "Resetar Skills: 0z";
+	mes "Resetar Ambos: 0z";
+	mes "Selecione a opção desejada:";
+	next;
+	menu "^FF3355Resetar Skills",L00,"Resetar Status",L11,"Resetar Ambos^000000",L22,"Quit",LEnd;
+	
+	L0:
+		mes "[Resetadora]";
+		if (Zeny < 200000) goto faltaZenys;
+		mes "Aqui vamos nós.";
+		set Zeny,zeny-1;
+		ResetSkill;
+		close;
+	L1:
+		mes "[Resetadora]";
+		if (Zeny < 200000) goto faltaZenys;
+		mes "Aqui vamos nós.";
+		set Zeny,zeny-1;
+		ResetStatus;
+		close;
+	L2:
+		mes "[Resetadora]";
+		if (Zeny < 300000) goto faltaZenys;
+		mes "Aqui vamos nós";
+		set Zeny,zeny-1;
+		ResetSkill;
+		ResetStatus;
+		close;
+		
+		L00:
+		mes "[Resetadora]";
+		mes "Aqui vamos nós.";
+		set Zeny,zeny-1;
+		ResetSkill;
+		close;
+	L11:
+		mes "[Resetadora]";
+		mes "Aqui vamos nós.";
+		set Zeny,zeny-1;
+		ResetStatus;
+		close;
+	L22:
+		mes "[Resetadora]";
+		mes "Aqui vamos nós";
+		set Zeny,zeny-1;
+		ResetSkill;
+		ResetStatus;
+		close;
+
+		faltaZenys:
+			mes "Me desculpe, mas você não tem dinheiro suficiente para isso.";
+			close;
+	LEnd:
+		close;	
+	L_no:
+	mes "[Resetadora]";
+	mes "Você não é VIP!";
+	close;
+}
