@@ -39,12 +39,12 @@ close;
 end;
 }
 
-turbo_room.gat	mapflag	nomemo
-turbo_room.gat	mapflag	noteleport
-turbo_room.gat	mapflag	noreturn
-turbo_room.gat	mapflag	nowarp
-turbo_room.gat	mapflag	nowarpto
-turbo_room.gat	mapflag	nosave	SavePoint
+que_temsky	mapflag	nomemo
+que_temsky	mapflag	noteleport
+que_temsky	mapflag	noreturn
+que_temsky	mapflag	nowarp
+que_temsky	mapflag	nowarpto
+que_temsky	mapflag	nosave	SavePoint
 
 //--------------------------------------------------------------------------------------------
 
