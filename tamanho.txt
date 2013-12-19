@@ -1,0 +1,80 @@
+// Desenvolvido por: Newgate
+// GitHub: https://github.com/newgate/
+// Versão 1.0
+//****************************************************************************************
+
+//if (Zeny < 1) goto NeedZenys;
+//set Zeny,zeny-1;  =   1z 
+// para alterar para 1kk seria assim:
+//if (Zeny < 1000000) goto NeedZenys;
+//set Zeny,zeny-1000000;
+
+
+prontera,150,150,4	script	Tamanho	124,{
+
+	mes "[Tamanho]";
+
+	mes "Olá, eu posso mudar seu tamanho:";
+	mes "Para Pequeno";
+	mes "ou";
+	mes "Gigante";
+	mes "Quer se tornar o quê?";
+
+	next;
+
+	menu "^FF3355Nanico",peq,"Gigante",grande,"Voltar ao Normal^000000",normal,"Quit",LEnd;
+
+	
+
+	peq:
+
+			mes "[Tamanho]";
+
+		if (Zeny < 1) goto NeedZenys;
+
+		mes "Prepare-se para morfar!";
+
+		set Zeny,zeny-1;
+
+		atcommand "@size 1";
+
+		close;
+
+	grande:
+
+		mes "[Tamanho]";
+
+		if (Zeny < 1) goto NeedZenys;
+
+		mes "Aqui vamos nós.";
+
+		set Zeny,zeny-1;
+
+		atcommand "@size 2";
+
+		close;
+
+	normal:
+
+			mes "[Tamanho]";
+
+		if (Zeny < 1) goto NeedZenys;
+
+		mes "Aqui vamos nós";
+
+		atcommand "@size 0";
+
+		close;
+
+
+
+		NeedZenys:
+
+			mes "Me desculpe, mas você não tem dinheiro suficiente para isso.";
+
+			close;
+
+	LEnd:
+
+		close;	
+}
