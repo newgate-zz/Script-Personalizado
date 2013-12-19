@@ -1,0 +1,35 @@
+// Desenvolvido por: Newgate
+// GitHub: https://github.com/newgate/
+// Versão 1.5
+//****************************************************************************************
+
+prontera,150,150,5<tab>script<tab>saporra<tab>77,{
+ 
+set @playerlevelvip, 0;
+ 
+if (getgmlevel() < @playerlevelvip) end;
+ 
+if (nomeColocado) goto go_Nome;
+ 
+mes "[ Newgate ]";
+mes "Olá "+strcharinfo(0)+",";
+next;
+ 
+mes "[ Newgate ]";
+mes "Você quer botar [souGay] no seu nome";
+next;
+menu "Sim, claro!",uiui, "Não, obrigado!",sohomi;
+ 
+uiui:
+        query_sql "UPDATE `char` SET `name` = '[souGay] "+strcharinfo(0)+"' WHERE `name` = '"+strcharinfo(0)+"'";
+        mes "[ Newgate ]";
+        mes "Prontinho! Sou purpurina bixa";
+        set nomeColocado, 1;
+        close;
+ 
+sohomi:
+        mes "[ Newgate ]";
+        mes "Isso aí! Tu é que nem EU Rapá!!";
+        close;
+ 
+}
