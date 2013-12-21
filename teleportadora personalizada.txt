@@ -1,0 +1,39 @@
+prontera,159,184,4	script	Garota SamiRO	70,{
+
+//----------------------------- Configura isso aí ----------------------------------
+
+set .@npc$,"[Teleporte SamiRO]";
+set @eventoW$,"prontera.gat";
+set @QuestW$,"prontera.gat";
+set @RopsW$,"prontera.gat";	
+set @LVL,0;
+//---------------------------------------------------------------
+
+if(getgmlevel() < @LVL) {
+mes @NPC$;
+mes "Você precisa ser ViP!";
+close;
+}
+mes @NPC$;
+mes "Olá, Aonde deseja ir ?";
+menu "Sala de Evento",evento,"Sala de Quest",Quest,"Sala de Rops",rops,"Cancelar!",CANCEL;
+
+evento:
+mes "vamos pra sala de evento";
+close;
+warp @eventoW$, 100, 100; end;
+
+quest:
+mes "vamos pra sala de Quests";
+close;
+warp @QuestW$, 100, 100; end;
+
+rops:
+mes "vamos pra sala de Rops";
+close;
+warp @ropsW$, 100, 100; end;
+
+CANCEL:
+close;
+end;
+}
