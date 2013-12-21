@@ -1,3 +1,8 @@
+// Desenvolvido por: Newgate
+// GitHub: https://github.com/newgate/
+// Versão 2.5
+//****************************************************************************************
+
 prontera,159,184,4	script	Garota SamiRO	70,{
 
 //----------------------------- Configura isso aí ----------------------------------
