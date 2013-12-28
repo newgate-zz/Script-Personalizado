@@ -1,0 +1,411 @@
+// Direitos Autorais
+//=============================================================================================================================================
+// Desenvolvido por: Newgate
+// Idéia Principais: PortalCake
+// GitHub: https://github.com/newgate/
+// Testado em Cronus e eAthena
+//============================================================================================================================================
+// Evento de Ano Novo
+// Version 3.0
+// Direitos Reservados Apenas para Cronus
+// Não autorizo Postagem em qualquer outro Fórum
+// Deus Protege meu Script, por que só ele mesmo pra entender essa lambança XD
+//=============================================================================================================================================
+// Como Usar:
+//
+// @itemID1,607; = Corresponde ao item pedido da @etapa
+//
+//=============================================================================================================================================
+// Como Funciona:
+//
+// Nos dias programados, Aparecerá o NPC de Preparamento, para setar a variável pra 0 os que já participaram.
+// Após irá aparecer o NPC Original, Que foi Dividido em 5 Partes usando orientação à objeto.
+// A cada etapa, irá diminuir 1 participante, sendo o total 5 no começo, e 1 ganhador apenas.
+// Aquele que consiguir entregar todos itens mais rápido, ganhará :)
+//=============================================================================================================================================
+// Configuração de Horários
+//=============================================================================================================================================
+
+-	script	configs	116,{
+
+//=============================================================================================================================================
+// OnDay = Pode escolher os dias exatos para abrir o evento
+// Se quiser que abra todo dia, faça assim:
+// OnClock1200:  = No caso, seria todo dia ao meio dia
+//=============================================================================================================================================
+
+OnDay0101: 
+OnDay0201:
+OnDay0301:
+OnDay0401:
+OnDay0501:
+OnDay0601:
+OnDay0701:
+OnDay0801:
+OnDay0901:
+OnDay1001:
+OnDay1101:
+OnDay1201:
+//=============================================================================================================================================
+// Configuração de Funcionamento
+//=============================================================================================================================================
+announce "O evento de ano novo irá começar em instantes, Converse com o NPC que está em prontera, para poder Participar.",0;
+enablenpc "Preparamento";
+sleep 15000;
+disablenpc "Preparamento";
+announce "Corram! Apenas 5 Podem se Inscrever pro evento de Ano Novo",0;
+enablenpc "Ano Novo";
+enablenpc "Ano Novo E2";
+enablenpc "Ano Novo E3";
+enablenpc "Ano Novo E4";
+enablenpc "Ano Novo E5";
+
+//=============================================================================================================================================
+// Resetando o Script para Todos poderem Participar Novamente
+//=============================================================================================================================================
+set .clicks$, 0;
+set .clicou$, 0;
+set .clika$, 0;
+set .clike$, 0;
+set .clicado$, 0;
+
+}
+//=============================================================================================================================================
+// Cadastrando e setando participantes já ativo para 0
+//=============================================================================================================================================
+prontera,147,172,3	script	Preparamento	81,{
+
+mes "Vejo que está querendo entrar no evento.";
+mes "Você está Cadastrado!";
+set etapas,0;
+close;
+OnInit:
+disablenpc "Ano Novo";
+disablenpc "Ano Novo E2";
+disablenpc "Ano Novo E3";
+disablenpc "Ano Novo E4";
+disablenpc "Ano Novo E5";
+disablenpc "Preparamento";
+}
+//=============================================================================================================================================
+// Início do evento
+//=============================================================================================================================================
+prontera,147,172,3	script	Ano Novo	81,{
+
+//=============================================================================================================================================
+// Nome do NPC
+//=============================================================================================================================================
+
+set .nome$, "^880055[ Evento Ano Novo ]^000000";
+
+//=============================================================================================================================================
+// Configure os itens das 4 @etapas
+//=============================================================================================================================================
+set @itemID1,607;
+set @itemID2,607;
+set @itemID3,607;
+set @itemID4,607;
+
+//=============================================================================================================================================
+// Recompensa por ganhar
+//=============================================================================================================================================
+set @recompensaID5,607;
+
+
+
+//=============================================================================================================================================
+// 5 é o Limite de Jogadores para entrar na Primeira @etapa
+// padrão: 5
+//=============================================================================================================================================
+
+if(.clicks >= 5) {
+mes "A Primeira @etapa foi completada por 5 players";
+mes "tente na próxima!";
+close;
+} else if (etapas == 1) {
+
+//=============================================================================================================================================
+// checar para o mesmo não registrar-se Novamente
+//=============================================================================================================================================
+
+mes .nome$;
+mes " Já terminou?";
+	switch(select("- Sim, terminei","- Ainda não")){
+	case 1:
+	mes "Vamos então para próxima @etapa!";
+	next;
+	warp "payon",165,233;
+	case 2:
+	mes "Ok, Vá procura os itens!";
+	close;
+}
+
+} else if (etapas == 0) {
+//=============================================================================================================================================
+// Início Do Evento - etapa 1/5
+//=============================================================================================================================================
+
+mes .nome$;
+mes "Parabéns, bem a tempo de entrar no evento!!";
+mes "Agora o Próximo só entrará 4";
+next;
+mes .nome$;
+mes "Para Começar, Me traga um: " +getitemname(@itemID1);
+set etapas,1;
+next;
+mes .nome$;
+mes "Estarei te esperando aqui, em prontera!!";
+set(.clicks,.clicks+1);
+close;
+}
+}
+
+//=============================================================================================================================================
+// Início da segunda @etapa do Evento - @etapa 2/5
+//=============================================================================================================================================
+
+payon,167,233,3	script	Ano Novo E2	81,{
+
+//=============================================================================================================================================
+// 4 é o Limite de Jogadores para entrar na Segunda @etapa
+// padrão: 4
+//=============================================================================================================================================
+
+if(.clicou >= 4) {
+mes "Desculpe, Foi Diminuido o limite de players...";
+mes "Tente na próxima";
+close;
+} else if (etapas == 2) {
+//=============================================================================================================================================
+// checar para o mesmo não registrar-se Novamente
+//=============================================================================================================================================
+
+mes .nome$;
+mes " Já terminou?";
+	switch(select("- Sim, terminei","- Ainda não")){
+	case 1:
+	mes "Vamos então para próxima @etapa!";
+	next;
+	warp "comodo",203,141;
+	case 2:
+	mes "Ok, Vá procura os itens!";
+	close;
+							}
+} else if (etapas == 1) { 
+if (etapas == 0) {
+mes "Complete a @etapa anterior";
+close;
+} else if(countitem(@itemID1) >= 1) {
+//=============================================================================================================================================
+// Continuação da Segunda @etapa
+//=============================================================================================================================================
+mes .nome$;
+mes "Parabéns, bem a tempo de entrar no evento!!";
+mes "Porém, Agora só entrará 4";
+mes "e no Próximo só entrará 3";
+next;
+mes .nome$;
+delitem @itemID1,1; 
+mes "Você já tem o item!";
+mes "Muito Bem, Agora Me traga um: " +getitemname(@itemID2);
+set etapas,2;
+next;
+mes .nome$;
+mes "Estarei te esperando aqui, em prontera!!";
+set(.clicou,.clicou+1);
+close;
+} else {
+mes "Você não tem o item pedido";
+mes "";
+mes getitemname(@itemID1);
+close;
+}
+}
+}
+
+//=============================================================================================================================================
+// Início da terceira @etapa do Evento - @etapa 3/5
+//=============================================================================================================================================
+
+comodo,200,141,3	script	Ano Novo E3	81,{
+
+//=============================================================================================================================================
+// 3 é o Limite de Jogadores para entrar na Segunda @etapa
+// padrão: 3
+//=============================================================================================================================================
+
+if(.clicou >= 3) {
+mes "Desculpe, Foi Diminuido o limite de players...";
+mes "Tente na próxima";
+close;
+} else if (etapas == 3) {
+//=============================================================================================================================================
+// checar para o mesmo não registrar-se Novamente
+//=============================================================================================================================================
+
+mes .nome$;
+mes " Já terminou?";
+	switch(select("- Sim, terminei","- Ainda não")){
+	case 1:
+	mes "Vamos então para próxima @etapa!";
+	next;
+	warp "izlude",126,119;
+	case 2:
+	mes "Ok, Vá procura os itens!";
+	close;
+							}
+} else if (etapas == 2) { 
+if (etapas <= 1 ) {
+mes "Complete a @etapa anterior";
+close;
+} else if(countitem(@itemID2) >= 1) {
+//=============================================================================================================================================
+// Continuação da terceira @etapa
+//=============================================================================================================================================
+
+mes .nome$;
+mes "Parabéns, bem a tempo de entrar no evento!!";
+mes "Porém, Agora só entrará 3";
+mes "e no Próximo só entrará 2";
+next;
+mes .nome$;
+delitem @itemID2,1;
+mes "Você já tem o item!";
+mes "Muito Bem, Agora Me traga um: " +getitemname(@itemID2);
+set etapas,3;
+next;
+mes .nome$;
+mes "Estarei te esperando aqui, em prontera!!";
+set(.clicou,.clicou+1);
+close;
+} else {
+mes "Você não tem o item pedido";
+mes "";
+mes getitemname(@itemID2);
+close;
+}
+}
+}
+
+//=============================================================================================================================================
+// Início da quarta @etapa do Evento - @etapa 4/5
+//=============================================================================================================================================
+
+izlude,126,119,3	script	Ano Novo E4	81,{
+
+//=============================================================================================================================================
+// 2 é o Limite de Jogadores para entrar na Segunda @etapa
+// padrão: 2
+//=============================================================================================================================================
+
+if(.clicou >= 2) {
+mes "Desculpe, Foi Diminuido o limite de players...";
+mes "Tente na próxima";
+close;
+} else if (etapas == 4) {
+//=============================================================================================================================================
+// checar para o mesmo não registrar-se Novamente
+//=============================================================================================================================================
+
+mes .nome$;
+mes " Já terminou?";
+	switch(select("- Sim, terminei","- Ainda não")){
+	case 1:
+	mes "Vamos então para próxima @etapa!";
+	next;
+	warp "xmas",152,133;
+	case 2:
+	mes "Ok, Vá procura os itens!";
+	close;
+							}
+} else if (etapas == 3) { 
+if (etapas <= 2 ) {
+mes "Complete a @etapa anterior";
+close;
+} else if(countitem(@itemID3) >= 1) {
+//=============================================================================================================================================
+// Continuação da quarta @etapa
+//=============================================================================================================================================
+
+mes .nome$;
+mes "Parabéns, bem a tempo de entrar no evento!!";
+mes "Porém, Agora só entrará 2";
+mes "e no Próximo será o ganhador";
+next;
+mes .nome$;
+delitem @itemID3,1;
+mes "Você já tem o item!";
+mes "Muito Bem, Agora Me traga um: " +getitemname(@itemID2);
+set etapas,4;
+next;
+mes .nome$;
+mes "Estarei te esperando aqui, em prontera!!";
+set(.clicou,.clicou+1);
+close;
+} else {
+mes "Você não tem o item pedido";
+mes "";
+mes getitemname(@itemID3);
+close;
+}
+}
+}
+
+
+//=============================================================================================================================================
+// Início da quinta etapa do Evento - etapa 5/5
+//=============================================================================================================================================
+
+xmas,150,133,3	script	Ano Novo E5	81,{
+
+//=============================================================================================================================================
+// 2 é o Limite de Jogadores para entrar na Segunda @etapa
+// padrão: 2
+//=============================================================================================================================================
+
+if(.clicou == 1) {
+mes "O Evento terminou e já tem um ganhador";
+close;
+} else if (etapas == 5) {
+//=============================================================================================================================================
+// checar para o mesmo não registrar-se Novamente
+//=============================================================================================================================================
+
+mes .nome$;
+mes "O evento terminou e ja tem um vencedor";
+close;
+} else if (etapas == 4) { 
+if (etapas <= 3) {
+mes "Complete a @etapa anterior";
+close;
+} else if(countitem(@itemID4) >= 1) {
+//=============================================================================================================================================
+// Continuação da quinta etapa
+//=============================================================================================================================================
+
+mes .nome$;
+delitem @itemID4,1; 
+mes "Parabéns, Você é o ganhador do evento!!";
+disablenpc "Ano Novo";
+disablenpc "Ano Novo E2";
+disablenpc "Ano Novo E3";
+disablenpc "Ano Novo E4";
+disablenpc "Ano Novo E5";
+next;
+mes .nome$;
+mes "Tome sua Recompensa";
+getitem @recompensaID5,1;
+set etapas,5;
+next;
+mes .nome$;
+set(.clicado,.clicado+1);
+announce "O Evento de Ano Novo terminou, Obrigado a todos participantes",0;
+close;
+} else {
+mes "Você não tem o item pedido";
+mes "";
+mes getitemname(@itemID4);
+close;
+}
+}
+}
